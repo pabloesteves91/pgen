@@ -12,6 +12,8 @@
     <div id="progressBar">
       <div id="progress"></div>
     </div>
+    <!-- Matrix Effekt -->
+    <canvas id="matrix"></canvas>
   </div>
 
   <div id="mainContent" class="hidden">
@@ -32,6 +34,7 @@
         <input type="number" id="passwordLength" value="12" min="6" max="24">
         <button onclick="startPasswordGeneration()">Passwort generieren</button>
         <div class="output" id="passwordOutput"></div>
+        <button id="copyButton" onclick="copyPassword()" class="hidden">Kopieren</button>
       </div>
 
       <!-- Passwort-Sicherheitsprüfung -->
