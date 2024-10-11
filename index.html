@@ -7,38 +7,47 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="terminal-box">
-    <h1 class="hacker-text">Mac-Terminal Passwort-Generator</h1>
-
-    <div class="menu">
-      <p>[1] Passwort generieren</p>
-      <p>[2] Passwort-Sicherheit prüfen</p>
-      <p>[3] Beenden</p>
+  <div id="startupScreen">
+    <p id="loadingText">System booting...</p>
+    <div id="progressBar">
+      <div id="progress"></div>
     </div>
+  </div>
 
-    <input type="text" id="choice" placeholder="Wähle eine Option..." onkeypress="handleInput(event)">
-    
-    <!-- Passwortoptionen -->
-    <div id="passwordOptions" class="hidden">
-      <p>Passwortlänge auswählen:</p>
-      <input type="number" id="passwordLength" value="12" min="6" max="24">
-      <button onclick="startPasswordGeneration()">Passwort generieren</button>
-      <div class="output" id="passwordOutput"></div>
+  <div id="mainContent" class="hidden">
+    <div class="terminal-box">
+      <h1 class="hacker-text">Mac-Terminal Passwort-Generator</h1>
+
+      <div class="menu">
+        <p>[1] Passwort generieren</p>
+        <p>[2] Passwort-Sicherheit prüfen</p>
+        <p>[3] Beenden</p>
+      </div>
+
+      <input type="text" id="choice" placeholder="Wähle eine Option..." onkeypress="handleInput(event)">
+      
+      <!-- Passwortoptionen -->
+      <div id="passwordOptions" class="hidden">
+        <p>Passwortlänge auswählen:</p>
+        <input type="number" id="passwordLength" value="12" min="6" max="24">
+        <button onclick="startPasswordGeneration()">Passwort generieren</button>
+        <div class="output" id="passwordOutput"></div>
+      </div>
+
+      <!-- Passwort-Sicherheitsprüfung -->
+      <div id="passwordCheck" class="hidden">
+        <p>Passwort eingeben:</p>
+        <input type="text" id="checkPassword" placeholder="Passwort zur Prüfung eingeben">
+        <button onclick="checkPassword()">Sicherheit prüfen</button>
+        <div class="output" id="passwordCheckOutput"></div>
+        <div id="alternatives"></div>
+      </div>
+
+      <!-- Sounds -->
+      <audio id="hackerSound" src="hackersound.mp3"></audio>
+      <audio id="errorSound" src="error.mp3"></audio>
+      <audio id="successSound" src="success.mp3"></audio>
     </div>
-
-    <!-- Passwort-Sicherheitsprüfung -->
-    <div id="passwordCheck" class="hidden">
-      <p>Passwort eingeben:</p>
-      <input type="text" id="checkPassword" placeholder="Passwort zur Prüfung eingeben">
-      <button onclick="checkPassword()">Sicherheit prüfen</button>
-      <div class="output" id="passwordCheckOutput"></div>
-      <div id="alternatives"></div>
-    </div>
-
-    <!-- Sounds -->
-    <audio id="hackerSound" src="hackersound.mp3"></audio>
-    <audio id="errorSound" src="error.mp3"></audio>
-    <audio id="successSound" src="success.mp3"></audio>
   </div>
 
   <script src="script.js"></script>
