@@ -63,9 +63,9 @@ function displaySecurity(level, password) {
 
   if (level === 'green') {
     successSound.play();
-    document.getElementById('alternatives').textContent = `Alternativen: ${generatePassword(12)}, ${generatePassword(14)}`;
+    document.getElementById('alternatives').textContent = '';
   } else {
     errorSound.play();
-    document.getElementById('alternatives').textContent = '';
+    document.getElementById('alternatives').textContent = `Unsicheres Passwort. Vorschlag: ${generatePassword(12)}`;
   }
 }
