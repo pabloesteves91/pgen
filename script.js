@@ -59,9 +59,128 @@ function drawMatrixEffect() {
     ctx.fillStyle = '#00FF00';  // Matrix-Grün
     ctx.font = fontSize + 'px monospace';
 
-Hier ist der komplett überarbeitete Hacker-Passwort-Generator mit allen gewünschten Features, Effekten und einem vollständig neu gestalteten, Hollywood-Hacker-inspirierten Interface. Das Ziel ist es, ein immersives Erlebnis zu schaffen, das den Benutzer in eine realistische Hacking-Simulation versetzt.
+    // Zeichnet die fallenden Zeichen
+    for (let i = 0; i < drops.length; i++) {
+      const text = lettersArray[Math.floor(Math.random() * lettersArray.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-### Features:
-1. **Full-Screen Matrix-Effekt**: Dieser Effekt läuft über den gesamten Bildschirm und simuliert fallende Zeichen wie in der "Matrix".
-2. **Ladebildschirm mit Hacker-Sound**: Ein interaktiver Ladebildschirm mit einer Fortschrittsanzeige, die typische Hackerphrasen zeigt.
-3. **Passwort-Generierung mit visuellen Effekten**: Passwörter werden generiert, während der Matrix-Effekt
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;  // Neustart des Zeichens am oberen Rand
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 50);  // Geschwindigkeit der Matrix-Animation
+}
+
+// Funktion zum Anzeigen des Hauptinhalts nach dem Ladebildschirm
+function showMainContent() {
+  document.getElementById('startupScreen').classList.add('hidden');
+  document.getElementById('mainContent').classList.remove('hidden');
+}
+
+// Funktion zum Generieren einer zufälligen Versionnummer in der Ecke
+function generateVersionNumber() {
+  let version = '';
+  for (let i = 0; i < 8; i++) {
+    version += Math.floor(Math.random() * 10);
+  }
+  document.getElementById('versionNumber').textContent = version;
+}
+
+// Funktion zum Behandeln der Benutzereingaben im Hauptmenü
+function handleInput(event) {
+  if (event.key === 'Enter') {
+    const choice = event.target.value;
+    if (choice === '1') {
+      showPasswordOptions();
+    } else if (choice === '2') {
+      showPasswordCheck();
+    } else if (choice === '3') {
+      alert('Beendet!');
+    } else {
+      errorSound.play();  // Spielt einen Fehler-Sound, wenn die Eingabe ungültig ist
+      alert('Ungültige Auswahl!');
+    }
+  }
+}
+
+// Zeigt die Passwortgenerierungsoptionen an
+function showPasswordOptions() {
+  document.getElementById('passwordOptions').classList.remove('hidden');
+  document.getElementById('passwordCheck').classList.add('hidden');
+}
+
+// Zeigt die Passwort-Sicherheitsprüfung an
+function showPasswordCheck() {
+  document.getElementById('passwordCheck').classList.remove('hidden');
+  document.getElementById('passwordOptions').classList.add('hidden');
+}
+
+// Generiert ein Passwort basierend auf der ausgewählten Länge
+function startPasswordGeneration() {
+  let length = document.getElementById('passwordLength').value;
+  let password = generatePassword(length);
+  hackerSound.play();  // Spielt den Hacker-Sound während der Passwortgenerierung
+  document.getElementById('passwordOutput').textContent = `Generiertes Passwort: ${password}`;
+  document.getElementById('copyButton').classList.remove('hidden');  // Zeigt den Kopierbutton an
+}
+
+// Generiert zufälliges Passwort
+function generatePassword(length) {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+}
+
+// Prüft die Sicherheit eines eingegebenen Passworts
+function checkPassword() {
+  const password = document.getElementById('checkPassword').value;
+  let securityLevel = calculateSecurity(password);
+  displaySecurity(securityLevel, password);
+}
+
+// Bestimmt die Sicherheit eines Passworts basierend auf der Länge und dem Komplexitätsgrad
+function calculateSecurity(password) {
+  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+-=\[\]{};':"\\|,.<>\/?])(?=.{12,})/;
+  const mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,12})/;
+  if (strongRegex.test(password)) return 'green';
+  if (mediumRegex.test(password)) return 'yellow';
+  return 'red';
+}
+
+// Zeigt die Sicherheitsbewertung und alternative Vorschläge an
+function displaySecurity(level, password) {
+  let output = document.getElementById('passwordCheckOutput');
+  output.textContent = `Passwort: ${password}`;
+  output.className = level;
+
+  if (level === 'green') {
+    successSound.play();
+    document.getElementById('alternatives').textContent = '';
+  } else {
+    errorSound.play();
+    document.getElementById('alternatives').textContent = `Unsicheres Passwort. Vorschlag: ${generateSimilarPassword(password)}`;
+  }
+}
+
+// Generiert ein ähnliches Passwort, falls das eingegebene Passwort unsicher ist
+function generateSimilarPassword(original) {
+  let newPassword = original.split('').map(char => {
+    return Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase();
+  }).join('');
+  return newPassword;
+}
+
+// Kopiert das generierte Passwort in die Zwischenablage
+function copyPassword() {
+  let password = document.getElementById('passwordOutput').textContent.split(': ')[1];
+  navigator.clipboard.writeText(password).then(() => {
+    alert('Passwort erfolgreich kopiert!');
+  });
+}
