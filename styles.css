@@ -1,112 +1,52 @@
-@font-face {
-  font-family: 'HackerFont';
-  src: url('https://fonts.cdnfonts.com/s/30005/VT323-Regular.woff2') format('woff2');
+/* styles.css */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.theme {
+    display: flex;
+    align-items: center;
+}
+
+#password {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Themes */
+.light-theme {
+    --background-color: #f0f0f0;
+    --text-color: #333;
+}
+
+.dark-theme {
+    --background-color: #222;
+    --text-color: #fff;
+}
+
+.cyberpunk-theme {
+    --background-color: #1a1a1a;
+    --text-color: #0ff;
 }
 
 body {
-  background-color: black;
-  color: limegreen;
-  font-family: 'HackerFont', monospace;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hidden {
-  display: none;
-}
-
-#startupScreen {
-  position: relative;
-  color: limegreen;
-  font-size: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#progressBar {
-  width: 80%;
-  height: 20px;
-  background-color: black;
-  border: 2px solid limegreen;
-  margin-top: 20px;
-}
-
-#progress {
-  width: 0;
-  height: 100%;
-  background-color: limegreen;
-}
-
-#matrix {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.2;
-  z-index: -1;
-}
-
-.terminal-box {
-  background-color: transparent;
-  padding: 20px;
-  width: 600px;
-}
-
-.hacker-text {
-  font-size: 2em;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.menu p {
-  font-size: 1.5em;
-  margin: 10px 0;
-}
-
-input {
-  background-color: black;
-  border: none;
-  border-bottom: 2px solid limegreen;
-  color: limegreen;
-  padding: 10px;
-  width: 80%;
-  font-family: 'HackerFont', monospace;
-  font-size: 1.2em;
-  margin-bottom: 20px;
-}
-
-button {
-  background-color: limegreen;
-  color: black;
-  padding: 10px 20px;
-  border: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: darkgreen;
-}
-
-.output {
-  font-size: 1.5em;
-  margin-top: 20px;
-  min-height: 40px;
-}
-
-/* Version Nummer oben links */
-.version-text {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 0.8em;
-  color: limegreen;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
