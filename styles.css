@@ -1,91 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+@font-face {
+  font-family: 'PixelFont';
+  src: url('https://fonts.cdnfonts.com/s/19698/Pixeled.woff') format('woff');
+}
 
 body {
-  margin: 0;
-  padding: 0;
   background-color: black;
-  overflow: hidden;
-  font-family: 'Roboto Mono', monospace;
-}
-
-canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.generator-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #00ff00;
-  background: rgba(0, 0, 0, 0.75);
-  padding: 30px;
-  width: 400px;
-  box-shadow: 0px 0px 20px #00ff00;
-  z-index: 2;
+  color: limegreen;
+  font-family: 'PixelFont', monospace;
   text-align: center;
+  padding: 50px;
+}
+
+.terminal-box {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border: 2px solid limegreen;
+  box-shadow: 0px 0px 15px limegreen;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .hacker-text {
-  color: #00ff00;
   font-size: 2em;
   margin-bottom: 20px;
-  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.options label {
-  color: #00ff00;
-  margin-right: 15px;
+.menu p {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+input {
+  background-color: black;
+  border: 2px solid limegreen;
+  color: limegreen;
+  padding: 10px;
+  width: 80%;
+  font-family: 'PixelFont', monospace;
+  font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
 button {
-  background-color: #00ff00;
+  background-color: limegreen;
   color: black;
   padding: 10px 20px;
   border: none;
-  cursor: pointer;
   font-size: 1.2em;
-  width: 100%;
-  margin-top: 20px;
+  cursor: pointer;
+  margin-top: 10px;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #00cc00;
+  background-color: darkgreen;
 }
 
 .output {
   font-size: 1.5em;
-  color: #00ff00;
   margin-top: 20px;
   min-height: 40px;
 }
 
-button:disabled {
-  background-color: grey;
+.hidden {
+  display: none;
 }
 
-@keyframes flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    text-shadow: 
-      0 0 2px #fff, 
-      0 0 4px #00ff00, 
-      0 0 6px #00ff00, 
-      0 0 8px #00ff00, 
-      0 0 12px #00ff00, 
-      0 0 16px #00ff00, 
-      0 0 20px #00ff00;
-  }
-  
-  20%, 24%, 55% {
-    text-shadow: none;
-  }
+#passwordCheckOutput.red {
+  color: red;
 }
 
-.output {
-  animation: flicker 1.5s infinite alternate;
+#passwordCheckOutput.yellow {
+  color: yellow;
+}
+
+#passwordCheckOutput.green {
+  color: limegreen;
 }
