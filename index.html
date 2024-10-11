@@ -7,17 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Matrix-Effekt (Full-Screen) -->
+  <canvas id="matrix"></canvas>
+
   <!-- Ladebildschirm -->
   <div id="startupScreen">
     <p id="loadingText">System booting...</p>
     <div id="progressBar">
       <div id="progress"></div>
     </div>
-    <!-- Matrix Effekt (Full-Screen) -->
-    <canvas id="matrix"></canvas>
   </div>
 
-  <!-- Hauptinhalt nach dem Bootvorgang -->
+  <!-- Hauptinhalt -->
   <div id="mainContent" class="hidden">
     <div class="terminal-box">
       <h1 class="hacker-text">Hacker Passwort-Generator</h1>
@@ -46,6 +47,11 @@
         <button onclick="checkPassword()">Sicherheit prüfen</button>
         <div class="output" id="passwordCheckOutput"></div>
         <div id="alternatives"></div>
+      </div>
+
+      <!-- Version in der Ecke -->
+      <div class="version-text">
+        Version: <span id="versionNumber"></span>
       </div>
 
       <!-- Sounds -->
