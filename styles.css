@@ -1,12 +1,12 @@
 @font-face {
-  font-family: 'PixelFont';
-  src: url('https://fonts.cdnfonts.com/s/19698/Pixeled.woff') format('woff');
+  font-family: 'TerminalFont';
+  src: url('https://fonts.cdnfonts.com/s/30005/VT323-Regular.woff2') format('woff2');
 }
 
 body {
   background-color: black;
   color: limegreen;
-  font-family: 'PixelFont', monospace;
+  font-family: 'TerminalFont', monospace;
   text-align: center;
   padding: 50px;
 }
@@ -37,7 +37,7 @@ input {
   color: limegreen;
   padding: 10px;
   width: 80%;
-  font-family: 'PixelFont', monospace;
+  font-family: 'TerminalFont', monospace;
   font-size: 1.2em;
   margin-bottom: 20px;
 }
