@@ -1,80 +1,71 @@
-@font-face {
-  font-family: 'PixelFont';
-  src: url('https://fonts.cdnfonts.com/s/19698/Pixeled.woff') format('woff');
+let hackerSound = document.getElementById('hackerSound');
+let errorSound = document.getElementById('errorSound');
+let successSound = document.getElementById('successSound');
+
+function handleInput(event) {
+  if (event.key === 'Enter') {
+    const choice = event.target.value;
+    if (choice === '1') {
+      showPasswordOptions();
+    } else if (choice === '2') {
+      showPasswordCheck();
+    } else if (choice === '3') {
+      alert('Beendet!');
+    } else {
+      errorSound.play();
+      alert('Ungültige Auswahl!');
+    }
+  }
 }
 
-body {
-  background-color: black;
-  color: limegreen;
-  font-family: 'PixelFont', monospace;
-  text-align: center;
-  padding: 50px;
+function showPasswordOptions() {
+  document.getElementById('passwordOptions').classList.remove('hidden');
+  document.getElementById('passwordCheck').classList.add('hidden');
 }
 
-.terminal-box {
-  background: rgba(0, 0, 0, 0.85);
-  padding: 20px;
-  border: 2px solid limegreen;
-  box-shadow: 0px 0px 15px limegreen;
-  max-width: 600px;
-  margin: 0 auto;
+function showPasswordCheck() {
+  document.getElementById('passwordCheck').classList.remove('hidden');
+  document.getElementById('passwordOptions').classList.add('hidden');
 }
 
-.hacker-text {
-  font-size: 2em;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+function startPasswordGeneration() {
+  let length = document.getElementById('passwordLength').value;
+  let password = generatePassword(length);
+  hackerSound.play();
+  document.getElementById('passwordOutput').textContent = `Generiertes Passwort: ${password}`;
 }
 
-.menu p {
-  font-size: 1.5em;
-  margin: 10px 0;
+function generatePassword(length) {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
 }
 
-input {
-  background-color: black;
-  border: 2px solid limegreen;
-  color: limegreen;
-  padding: 10px;
-  width: 80%;
-  font-family: 'PixelFont', monospace;
-  font-size: 1.2em;
-  margin-bottom: 20px;
+function checkPassword() {
+  const password = document.getElementById('checkPassword').value;
+  let securityLevel = calculateSecurity(password);
+  displaySecurity(securityLevel, password);
 }
 
-button {
-  background-color: limegreen;
-  color: black;
-  padding: 10px 20px;
-  border: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s;
+function calculateSecurity(password) {
+  if (password.length < 8) return 'red';
+  if (password.length >= 8 && password.length <= 12) return 'yellow';
+  if (password.length > 12) return 'green';
 }
 
-button:hover {
-  background-color: darkgreen;
-}
+function displaySecurity(level, password) {
+  let output = document.getElementById('passwordCheckOutput');
+  output.textContent = `Passwort: ${password}`;
+  output.className = level;
 
-.output {
-  font-size: 1.5em;
-  margin-top: 20px;
-  min-height: 40px;
-}
-
-.hidden {
-  display: none;
-}
-
-#passwordCheckOutput.red {
-  color: red;
-}
-
-#passwordCheckOutput.yellow {
-  color: yellow;
-}
-
-#passwordCheckOutput.green {
-  color: limegreen;
+  if (level === 'green') {
+    successSound.play();
+    document.getElementById('alternatives').textContent = `Alternativen: ${generatePassword(12)}, ${generatePassword(14)}`;
+  } else {
+    errorSound.play();
+    document.getElementById('alternatives').textContent = '';
+  }
 }
