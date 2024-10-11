@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pgen - Matrix Passwort-Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <div class="generator-box">
+    <h1 class="hacker-text">pgen - Hacker Passwort-Generator</h1>
+
+    <div class="options">
+      <label>
+        <input type="checkbox" id="useLetters" checked>
+        Buchstaben
+      </label>
+      <label>
+        <input type="checkbox" id="useNumbers" checked>
+        Zahlen
+      </label>
+    </div>
+
+    <button onclick="generatePassword()">Generiere Passwort</button>
+
+    <div class="output" id="passwordOutput">Warte auf Eingabe...</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
