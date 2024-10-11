@@ -8,16 +8,41 @@ body {
   color: limegreen;
   font-family: 'TerminalFont', monospace;
   text-align: center;
-  padding: 50px;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+#startupScreen {
+  color: limegreen;
+  font-size: 2em;
+}
+
+#progressBar {
+  width: 80%;
+  height: 20px;
+  background-color: black;
+  border: 2px solid limegreen;
+  margin-top: 20px;
+}
+
+#progress {
+  width: 0;
+  height: 100%;
+  background-color: limegreen;
 }
 
 .terminal-box {
-  background: rgba(0, 0, 0, 0.85);
+  background-color: transparent;
   padding: 20px;
-  border: 2px solid limegreen;
-  box-shadow: 0px 0px 15px limegreen;
-  max-width: 600px;
-  margin: 0 auto;
+  width: 600px;
 }
 
 .hacker-text {
@@ -33,7 +58,8 @@ body {
 
 input {
   background-color: black;
-  border: 2px solid limegreen;
+  border: none;
+  border-bottom: 2px solid limegreen;
   color: limegreen;
   padding: 10px;
   width: 80%;
@@ -61,20 +87,4 @@ button:hover {
   font-size: 1.5em;
   margin-top: 20px;
   min-height: 40px;
-}
-
-.hidden {
-  display: none;
-}
-
-#passwordCheckOutput.red {
-  color: red;
-}
-
-#passwordCheckOutput.yellow {
-  color: yellow;
-}
-
-#passwordCheckOutput.green {
-  color: limegreen;
 }
