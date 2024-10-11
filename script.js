@@ -37,7 +37,13 @@ function drawMatrix() {
 
 setInterval(drawMatrix, 30);
 
-// Password Generator Logic
+// Password Generator Logic with Matrix Effect
+function startPasswordGeneration() {
+  document.getElementById('passwordOutput').textContent = "Passwort wird generiert...";
+  
+  setTimeout(generatePassword, 2000); // Simulate a "hacker-like" delay
+}
+
 function generatePassword() {
   const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const numbers = "0123456789";
@@ -56,7 +62,14 @@ function generatePassword() {
 
   for (let i = 0; i < 12; i++) {
     password += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
 
-  document.getElementById('passwordOutput').textContent = password;
+    // Show password character by character like in a hacker movie
+    showPassword(password);
+  }
+}
+
+function showPassword(password) {
+  setTimeout(() => {
+    document.getElementById('passwordOutput').textContent = password;
+  }, 1000); // Show each letter with a slight delay
 }
