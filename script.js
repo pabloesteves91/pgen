@@ -17,6 +17,7 @@ function loadStartupScreen() {
     if (width >= 100) {
       clearInterval(interval);
       showMainContent();
+      loadingText.textContent = ''; // Entfernt "Finalizing..." nach dem Laden
     } else {
       width++;
       progress.style.width = width + '%';
@@ -31,7 +32,7 @@ function loadStartupScreen() {
   }, 50);
 }
 
-// Matrix-Effekt
+// Matrix-Effekt über die gesamte Seite
 function drawMatrixEffect() {
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
@@ -156,6 +157,6 @@ function generateSimilarPassword(original) {
 function copyPassword() {
   let password = document.getElementById('passwordOutput').textContent.split(': ')[1];
   navigator.clipboard.writeText(password).then(() => {
-    alert('Passwort kopiert!');
+    alert('Passwort erfolgreich kopiert!');
   });
 }
