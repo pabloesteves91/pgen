@@ -5,6 +5,7 @@ let successSound = document.getElementById('successSound');
 document.addEventListener("DOMContentLoaded", function() {
   loadStartupScreen();
   drawMatrixEffect();
+  generateVersionNumber();
 });
 
 // Funktion für den Ladebildschirm mit Fortschrittsleiste und Sound
@@ -80,6 +81,15 @@ function showMainContent() {
   document.getElementById('mainContent').classList.remove('hidden');
 }
 
+// Funktion zum Generieren einer zufälligen Versionnummer in der Ecke
+function generateVersionNumber() {
+  let version = '';
+  for (let i = 0; i < 8; i++) {
+    version += Math.floor(Math.random() * 10);
+  }
+  document.getElementById('versionNumber').textContent = version;
+}
+
 // Funktion zum Behandeln der Benutzereingaben im Hauptmenü
 function handleInput(event) {
   if (event.key === 'Enter') {
@@ -120,7 +130,7 @@ function startPasswordGeneration() {
 
 // Generiert zufälliges Passwort
 function generatePassword(length) {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
   let password = '';
   for (let i = 0; i < length; i++) {
     password += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -135,11 +145,13 @@ function checkPassword() {
   displaySecurity(securityLevel, password);
 }
 
-// Bestimmt die Sicherheit eines Passworts basierend auf der Länge
+// Bestimmt die Sicherheit eines Passworts basierend auf der Länge und dem Komplexitätsgrad
 function calculateSecurity(password) {
-  if (password.length < 8) return 'red';
-  if (password.length >= 8 && password.length <= 12) return 'yellow';
-  if (password.length > 12) return 'green';
+  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+-=\[\]{};':"\\|,.<>\/?])(?=.{12,})/;
+  const mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,12})/;
+  if (strongRegex.test(password)) return 'green';
+  if (mediumRegex.test(password)) return 'yellow';
+  return 'red';
 }
 
 // Zeigt die Sicherheitsbewertung und alternative Vorschläge an
