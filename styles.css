@@ -7,7 +7,6 @@ body {
   background-color: black;
   color: limegreen;
   font-family: 'HackerFont', monospace;
-  text-align: center;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -101,4 +100,13 @@ button:hover {
   font-size: 1.5em;
   margin-top: 20px;
   min-height: 40px;
+}
+
+/* Version Nummer oben links */
+.version-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.8em;
+  color: limegreen;
 }
