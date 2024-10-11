@@ -1,81 +1,80 @@
-// Matrix Effect
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-const lettersArray = letters.split('');
-
-const fontSize = 18;
-const columns = canvas.width / fontSize;
-const drops = [];
-
-for (let x = 0; x < columns; x++) {
-  drops[x] = 1;
+@font-face {
+  font-family: 'PixelFont';
+  src: url('https://fonts.cdnfonts.com/s/19698/Pixeled.woff') format('woff');
 }
 
-function drawMatrix() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = '#00ff00'; 
-  ctx.font = fontSize + 'px monospace';
-
-  for (let i = 0; i < drops.length; i++) {
-    const text = lettersArray[Math.floor(Math.random() * lettersArray.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
-    }
-
-    drops[i]++;
-  }
+body {
+  background-color: black;
+  color: limegreen;
+  font-family: 'PixelFont', monospace;
+  text-align: center;
+  padding: 50px;
 }
 
-setInterval(drawMatrix, 33);
-
-// Password Generation with Matrix Effect
-function startPasswordGeneration() {
-  document.getElementById('passwordOutput').textContent = "Passwort wird generiert...";
-  document.querySelector("button").disabled = true;
-  
-  setTimeout(generatePassword, 3000); // Simulate delay for "hacker-like" effect
+.terminal-box {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border: 2px solid limegreen;
+  box-shadow: 0px 0px 15px limegreen;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-function generatePassword() {
-  const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const numbers = "0123456789";
-  let characters = "";
-  let password = "";
-  const useLetters = document.getElementById('useLetters').checked;
-  const useNumbers = document.getElementById('useNumbers').checked;
-
-  if (useLetters) characters += letters;
-  if (useNumbers) characters += numbers;
-
-  if (characters === "") {
-    document.getElementById('passwordOutput').textContent = "Keine Option ausgewählt!";
-    return;
-  }
-
-  for (let i = 0; i < 12; i++) {
-    password += characters.charAt(Math.floor(Math.random() * characters.length));
-
-    // Display password one character at a time
-    showPassword(password, i);
-  }
-
-  // Re-enable button after password generation
-  setTimeout(() => {
-    document.querySelector("button").disabled = false;
-  }, 1300);
+.hacker-text {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
-function showPassword(password, index) {
-  setTimeout(() => {
-    document.getElementById('passwordOutput').textContent = password;
-  }, index * 100); // Delay the appearance of each character
+.menu p {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+input {
+  background-color: black;
+  border: 2px solid limegreen;
+  color: limegreen;
+  padding: 10px;
+  width: 80%;
+  font-family: 'PixelFont', monospace;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: limegreen;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: darkgreen;
+}
+
+.output {
+  font-size: 1.5em;
+  margin-top: 20px;
+  min-height: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+#passwordCheckOutput.red {
+  color: red;
+}
+
+#passwordCheckOutput.yellow {
+  color: yellow;
+}
+
+#passwordCheckOutput.green {
+  color: limegreen;
 }
