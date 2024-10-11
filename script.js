@@ -1,4 +1,3 @@
-// Hacker-Sound für den Ladebildschirm
 let hackerSound = document.getElementById('hackerSound');
 let errorSound = document.getElementById('errorSound');
 let successSound = document.getElementById('successSound');
