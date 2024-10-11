@@ -1,18 +1,19 @@
-@font-face {
-  font-family: 'PixelFont';
-  src: url('https://fonts.cdnfonts.com/s/19698/Pixeled.woff') format('woff');
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
 
 body {
   margin: 0;
   padding: 0;
   background-color: black;
   overflow: hidden;
-  font-family: 'PixelFont', 'Courier New', Courier, monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 
 canvas {
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .generator-box {
@@ -20,38 +21,71 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid limegreen;
-  padding: 20px;
-  width: 350px;
-  box-shadow: 0px 0px 20px limegreen;
-  z-index: 10;
-}
-
-.output {
-  font-size: 1.5em;
-  margin-top: 20px;
-  height: 30px;
-  color: limegreen;
+  border: 2px solid #00ff00;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0px 0px 20px #00ff00;
+  z-index: 2;
+  text-align: center;
 }
 
 .hacker-text {
-  color: limegreen;
+  color: #00ff00;
+  font-size: 2em;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
 }
 
 .options label {
-  color: limegreen;
+  color: #00ff00;
+  margin-right: 15px;
 }
 
 button {
-  background-color: limegreen;
+  background-color: #00ff00;
   color: black;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   cursor: pointer;
   font-size: 1.2em;
   width: 100%;
+  margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: darkgreen;
+  background-color: #00cc00;
+}
+
+.output {
+  font-size: 1.5em;
+  color: #00ff00;
+  margin-top: 20px;
+  min-height: 40px;
+}
+
+button:disabled {
+  background-color: grey;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 
+      0 0 2px #fff, 
+      0 0 4px #00ff00, 
+      0 0 6px #00ff00, 
+      0 0 8px #00ff00, 
+      0 0 12px #00ff00, 
+      0 0 16px #00ff00, 
+      0 0 20px #00ff00;
+  }
+  
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.output {
+  animation: flicker 1.5s infinite alternate;
 }
