@@ -1,12 +1,12 @@
 @font-face {
-  font-family: 'TerminalFont';
+  font-family: 'HackerFont';
   src: url('https://fonts.cdnfonts.com/s/30005/VT323-Regular.woff2') format('woff2');
 }
 
 body {
   background-color: black;
   color: limegreen;
-  font-family: 'TerminalFont', monospace;
+  font-family: 'HackerFont', monospace;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -77,7 +77,7 @@ input {
   color: limegreen;
   padding: 10px;
   width: 80%;
-  font-family: 'TerminalFont', monospace;
+  font-family: 'HackerFont', monospace;
   font-size: 1.2em;
   margin-bottom: 20px;
 }
