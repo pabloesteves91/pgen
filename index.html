@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passwort-Generator</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker Passwort-Generator</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Passwort-Generator</h1>
-        <div class="settings">
-            <label for="length">Passwortlänge:</label>
-            <input type="number" id="length" min="8" value="12">
-            <label for="include-symbols">Sonderzeichen:</label>
-            <input type="checkbox" id="include-symbols" checked>
-            <label for="theme">Theme:</label>
-            <select id="theme">
-                <option value="light">Hell</option>
-                <option value="dark">Dunkel</option>
-                <option value="cyberpunk">Cyberpunk</option>
-            </select>
-        </div>
-        <button id="generate">Generieren</button>
-        <p id="password"></p>
+  <!-- Matrix-Effekt (Full-Screen) -->
+  <canvas id="matrix"></canvas>
+
+  <!-- Ladebildschirm -->
+  <div id="startupScreen">
+    <p id="loadingText">System booting...</p>
+    <div id="progressBar">
+      <div id="progress"></div>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <!-- Hauptinhalt -->
+  <div id="mainContent" class="hidden">
+    <div class="terminal-box">
+      <h1 class="hacker-text">Hacker Passwort-Generator</h1>
+
+      <div class="menu">
+        <p>[1] Passwort generieren</p>
+        <p>[2] Passwort-Sicherheit prüfen</p>
+        <p>[3] Beenden</p>
+      </div>
+
+      <input type="text" id="choice" placeholder="Wähle eine Option..." onkeypress="handleInput(event)">
+      
+      <!-- Passwortoptionen -->
+      <div id="passwordOptions" class="hidden">
+        <p>Passwortlänge auswählen:</p>
+        <input type="number" id="passwordLength" value="12" min="6" max="24">
+        <button onclick="startPasswordGeneration()">Passwort generieren</button>
+        <div class="output" id="passwordOutput"></div>
+        <button id="copyButton" onclick="copyPassword()" class="hidden">Kopieren</button>
+      </div>
+
+      <!-- Passwort-Sicherheitsprüfung -->
+      <div id="passwordCheck" class="hidden">
+        <p>Passwort eingeben:</p>
+        <input type="text" id="checkPassword" placeholder="Passwort zur Prüfung eingeben">
+        <button onclick="checkPassword()">Sicherheit prüfen</button>
+        <div class="output" id="passwordCheckOutput"></div>
+        <div id="alternatives"></div>
+      </div>
+
+      <!-- Version in der Ecke -->
+      <div class="version-text">
+        Version: <span id="versionNumber"></span>
+      </div>
+
+      <!-- Sounds -->
+      <audio id="hackerSound" src="hackersound.mp3"></audio>
+      <audio id="errorSound" src="error.mp3"></audio>
+      <audio id="successSound" src="success.mp3"></audio>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
